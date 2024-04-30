@@ -1,7 +1,4 @@
-"""
-@author: António Brito / Carlos Bragança
-(2022) #objective: class Product
-"""""
+
 # Class Product
 # Import the generic class
 from classes.gclass import Gclass
