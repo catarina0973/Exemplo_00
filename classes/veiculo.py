@@ -1,4 +1,3 @@
-
 # Class Product
 # Import the generic class
 from classes.gclass import Gclass
@@ -55,3 +54,5 @@ class Veiculo(Gclass):
     @disponivel.setter
     def disponivel(self, disponivel):
         self._disponivel=disponivel
+
+
