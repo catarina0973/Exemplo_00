@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr  5 11:29:24 2024
-
-@author: cacfa
-"""
-
 # Generic Class
 import sys
 import datetime
