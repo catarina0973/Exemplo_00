@@ -13,8 +13,8 @@ class Admnistradores(Gclass):
     pos = 0
     sortkey = ''
     auto_number = 0
-    att=['_nome','_senha','_code']
-    def __init__(self, nome, senha, code=None):
+    att=['_code','_senha','_nome']
+    def __init__(self, code, nome, senha):
         super().__init__()
         self._code=code
         self._nome=str(nome)
