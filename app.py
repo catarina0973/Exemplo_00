@@ -1,71 +1,84 @@
+# -*- coding: utf-8 -*-
 """
-@author: António Brito / Carlos Bragança
-(2024)
-#objective: Flask example for class Person
-"""""
-from flask import Flask, render_template, request
-from classes.Person import Person
+Created on Tue Apr 30 10:16:26 2024
+
+@author: cacfa
+"""
+
+from flask import Flask, render_template, request, session
+from datafile import filename
+
+import os
+
+from classes.cliente import Cliente
+from classes.admnistradores import Admnistradores
+from classes.veiculo import Veiculo
+from classes.recolha import Recolha
+from classes.aluguer import Aluguer
+from classes.userlogin import Userlogin
 
 app = Flask(__name__)
-path = 'data/'
-Person.read(path)
+
+Cliente.read(filename + 'business.db')
+Admnistradores.read(filename + 'business.db')
+Veiculo.read(filename + 'business.db')
+Userlogin.read(filename + 'business.db')
+Aluguer.read(filename + 'business.db')
+Recolha.read(filename + 'business.db')
 prev_option = ""
+submenu = ""
+app.secret_key = 'BAD_SECRET_KEY'
 
-@app.route("/", methods=["post","get"])
+upload_folder = os.path.join('static', 'ProductFotos')
+app.config['UPLOAD'] = upload_folder
+
+
+import subs_login as lsub
+import subs_gform as gfsub
+import subs_gformT as gfTsub
+
+
+
+@app.route("/")
 def index():
-    global prev_option
-    butshow = "enabled"
-    butedit = "disabled"
-    option = request.args.get("option")
-    if option == "edit":
-        butshow = "disabled"
-        butedit = "enabled"
-    elif option == "delete":
-        obj = Person.current()
-        Person.remove(obj.code)
-        if not Person.previous():
-            Person.first()
-        Person.write(path)
-    elif option == "insert":
-        butshow = "disabled"
-        butedit = "enabled"
-    elif option == 'cancel':
-        pass
-    elif prev_option == 'insert' and option == 'save':
-        strobj = request.form["code"] + ';' + request.form["name"] + ';' + \
-        request.form["dob"] + ';' + request.form["salary"]
-        Person.from_string(strobj)
-        Person.write(path)
-        Person.last()
-    elif prev_option == 'edit' and option == 'save':
-        obj = Person.current()
-        obj.code = request.form["code"]
-        obj.name = request.form["name"]
-        obj.dob = request.form["dob"]
-        obj.salary = float(request.form["salary"])
-        Person.write(path)
-    elif option == "first":
-        Person.first()
-    elif option == "previous":
-        Person.previous()
-    elif option == "next":
-        Person.nextrec()
-    elif option == "last":
-        Person.last()
-    elif option == 'exit':
-        return "<h1>Thank you for using Person app</h1>"
-    prev_option = option
-    obj = Person.current()
-    if option == 'insert':
-        code,name,dob,salary = "","","",""
-    else:
-        code = obj.code
-        name = obj.name
-        dob = obj.dob
-        salary = obj.salary
+    return render_template("index.html", ulogin=session.get("user"))
+    
+@app.route("/login")
+def login():
+    return lsub.login()
 
-    return render_template("index.html", butshow=butshow, butedit=butedit,\
-                               code=code,name=name,dob=dob,salary=salary)
+@app.route("/logoff")
+def logoff():
+    return lsub.logoff()
 
+@app.route("/chklogin", methods=["post","get"])
+def chklogin():
+    return lsub.chklogin()
+
+@app.route("/submenu", methods=["post","get"])
+def getsubm():
+    global submenu
+    submenu = request.args.get("subm")
+    return render_template("index.html", ulogin=session.get("user"),submenu=submenu)
+
+@app.route("/gform/<cname>", methods=["post","get"])
+def gform(cname=''):
+    submenu = request.args.get("subm")
+    return gfsub.gform(cname,submenu)
+
+@app.route("/gformT/<cname>", methods=["post","get"])
+def gformT(cname=''):
+    submenu = request.args.get("subm")
+    return gfTsub.gformT(cname,submenu)
+
+
+@app.route("/uc", methods=["post","get"])
+def uc():
+    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+
+
+
+    
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True,port=6001)
+    #app.run()
