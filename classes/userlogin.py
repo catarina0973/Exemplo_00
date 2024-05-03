@@ -16,7 +16,7 @@ class Userlogin(Gclass):
     auto_number =0
     nkey=1
     att=['_user','_usergroup','_senha']
-    header= 'Users'
+    header= 'Login'
     des=['User', 'User group', 'Senha']
     username=''
     def __init__(self,user, usergroup, senha):
