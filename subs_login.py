@@ -15,7 +15,8 @@ def login():
 def logoff():
     session.pop("user",None)
     return render_template("index.html", ulogin=session.get("user"))
-
+def signup() :
+    return render_template("signup.html", user= "", password="", ulogin=session.get("user"),resul = "")
 def chklogin():
     user = request.form["user"]
     password = request.form["password"]
