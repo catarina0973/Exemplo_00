@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 10:16:26 2024
-
-@author: cacfa
-"""
-
 from flask import Flask, render_template, request, session
 from datafile import filename
 
@@ -54,7 +47,9 @@ def logoff():
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
     return lsub.chklogin()
-
+@app.route("/signup")
+def signup():
+    return lsub.signup()
 @app.route("/submenu", methods=["post","get"])
 def getsubm():
     global submenu
