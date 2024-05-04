@@ -1,0 +1,36 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class = "dados">
+        <br><br>
+        <h1>Sign Up</h1>
+        <br>
+        <form id="form" action="/chklogin" method="post">
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="user"  value = "{{user}}" size="30"/>
+            <br><br>
+            <label for="nome">Nome Completo:</label>
+            <input type="nome" id="nome" name="nome" value = "{{nome}}" size="30"/>
+            <br><br>
+            <label for="nome">E-mail:</label>
+            <input type="endereco" id="endereco" name="endereco" value = "{{endereco}}" size="30"/>
+            <br><br>
+            <label for="nome">Número de telemóvel:</label>
+            <input type="telemovel" id="telemovel" name="telemovel" value = "{{telemovel}}" size="30"/>
+            <br><br>
+            <label for="password">Definir password:</label>
+            <input type="password" id="password" name="password" value = "{{password}}" size="30"/>
+            
+            <br><br>
+            <button type="submit" class="button1">Sign Up</button>
+        </form>
+        <br><br>
+        <h3>{{resul}}</h3>
+    </div>
+{% endblock %}
