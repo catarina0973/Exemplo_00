@@ -13,18 +13,16 @@ class Admnistradores(Gclass):
     pos = 0
     sortkey = ''
     auto_number = 0
-    att=['_code','_senha','_nome']
-    def __init__(self, code, nome, senha):
+    att=['_nome','__senha']
+    def __init__(self, nome,senha):
         super().__init__()
-        self._code=code
+        
         self._nome=str(nome)
         
         self._senha=senha
-        Admnistradores.obj[code]=self
-        Admnistradores.lst.append(code)
-    @property 
-    def code(self):
-        return self._code
+        Admnistradores.obj[nome]=self
+        Admnistradores.lst.append(nome)
+    
     
     @property 
     def nome(self):
@@ -41,3 +39,4 @@ class Admnistradores(Gclass):
         Admnistradores.obj.clear()
         Admnistradores.lst.clear()
         
+
