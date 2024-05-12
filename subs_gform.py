@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 17:09:19 2024
-
-@author: cacfa
-"""
 
 from flask import Flask, render_template, request, session
 from classes.cliente import Cliente
+from classes.admnistradores import Admnistradores
 from classes.veiculo import Veiculo
-
+from classes.recolha import Recolha
+from classes.aluguer import Aluguer
 from classes.userlogin import Userlogin
 
 prev_option = ""
