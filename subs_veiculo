@@ -1,0 +1,6 @@
+from flask import Flask, render_template, request, session
+from classes.veiculo import Veiculo
+
+
+def veiculo():
+    return render_template("veiculo.html")
