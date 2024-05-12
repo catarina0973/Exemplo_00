@@ -3,6 +3,7 @@ from datafile import filename
 
 import os
 
+
 from classes.cliente import Cliente
 from classes.admnistradores import Admnistradores
 from classes.veiculo import Veiculo
@@ -10,14 +11,14 @@ from classes.recolha import Recolha
 from classes.aluguer import Aluguer
 from classes.userlogin import Userlogin
 
+
 app = Flask(__name__)
 
 Cliente.read(filename + 'business.db')
-Admnistradores.read(filename + 'business.db')
 Veiculo.read(filename + 'business.db')
-Userlogin.read(filename + 'business.db')
 Aluguer.read(filename + 'business.db')
-Recolha.read(filename + 'business.db')
+
+Userlogin.read(filename + 'business.db')
 prev_option = ""
 submenu = ""
 app.secret_key = 'BAD_SECRET_KEY'
@@ -29,7 +30,11 @@ app.config['UPLOAD'] = upload_folder
 import subs_login as lsub
 import subs_gform as gfsub
 import subs_gformT as gfTsub
-
+import subs_veiculo as vsub
+# import subs_hform as gfhsub
+# import subs_subform as gfsubsub
+# import subs_productFoto as productFotosub
+# import subs_mapaOrderform as mapasub
 
 
 @app.route("/")
@@ -47,9 +52,9 @@ def logoff():
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
     return lsub.chklogin()
-@app.route("/signup")
-def signup():
-    return lsub.signup()
+@app.route("/veiculo")
+def veiculo():
+    return vsub.veiculo()
 @app.route("/submenu", methods=["post","get"])
 def getsubm():
     global submenu
@@ -66,10 +71,34 @@ def gformT(cname=''):
     submenu = request.args.get("subm")
     return gfTsub.gformT(cname,submenu)
 
+# @app.route("/hform/<cname>", methods=["post","get"])
+# def hform(cname=''):
+#     submenu = request.args.get("subm")
+#     return gfhsub.hform(cname,submenu)
 
-@app.route("/uc", methods=["post","get"])
-def uc():
-    return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
+
+        
+# @app.route("/subform/<cname>", methods=["post","get"])
+# def subform(cname=""):
+#     submenu = request.args.get("subm")
+#     return gfsubsub.subform(cname,submenu)
+
+
+# @app.route("/productform", methods=["post","get"])
+# def productFoto():
+#     submenu = request.args.get("subm")
+#     cname = 'Product'
+#     return productFotosub.productFoto(app,cname,submenu)
+
+# @app.route("/order/mapa", methods=["post","get"])
+# def ordermapa():
+#     submenu = request.args.get("subm")
+#     cname = ''
+#     return mapasub.mapaOrderform(app,cname,submenu)
+
+# @app.route("/uc", methods=["post","get"])
+# def uc():
+#     return render_template("uc.html", ulogin=session.get("user"),submenu=submenu)
 
 
 
