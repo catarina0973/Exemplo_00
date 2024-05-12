@@ -13,21 +13,19 @@ class Cliente(Gclass):
     sortkey = ''
     auto_number = 0
     nkey = 1
-    att=['_code','_nome','_endereco','_telemovel','_senha']
-    def __init__(self, code, nome, endereco, telemovel, senha):
+    att=['_nome','_endereco','_telemovel','_senha']
+    def __init__(self, nome, endereco, telemovel, senha):
         super().__init__()
-        self._code=code
+        
         self._nome=str(nome)
         self._endereco=str(endereco)
         self._telemovel=telemovel
         self._senha=senha
         
-        Cliente.obj[code]=self
-        Cliente.lst.append(code)
+        Cliente.obj[nome]=self
+        Cliente.lst.append(nome)
     
-    @property 
-    def code(self):
-        return self._code
+    
     
     @property 
     def nome(self):
@@ -56,3 +54,4 @@ class Cliente(Gclass):
     def clear():
         Cliente.obj.clear()
         Cliente.lst.clear()
+        
