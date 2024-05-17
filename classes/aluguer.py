@@ -18,7 +18,7 @@ class Aluguer(Gclass):
     # field description for use in, for example, in input form
     des = ['Código de aluguer','Placa','Número de dias','Preço', 'Data de início','Data final']
     # Constructor: Called when an object is instantiated
-    def __init__(self, aluguer, cliente, placa, dias, preco, datainicio, datafinal):
+    def __init__(self, aluguer, cliente, placa, dias, preco_veiculo, datainicio, datafinal):
         super().__init__()
         # Object attributes
         # Check the order and product referential integrity
@@ -27,7 +27,7 @@ class Aluguer(Gclass):
                 self._aluguer = aluguer
                 self._placa = placa
                 self._dias = int(dias)
-                self._preco = float(preco)
+                self._preco_veiculo = float(preco_veiculo)
                 self._datainicio = datetime.date.fromisoformat(datainicio)
                 self._datafinal = datetime.date.fromisoformat(datafinal)
                 # Add the new object to the OrderProduct list
@@ -56,12 +56,12 @@ class Aluguer(Gclass):
         self._dias = int(dias)
     # price property getter method
     @property
-    def preco(self):
-        return self._preco
+    def preco_veiculo(self):
+        return self._preco_veiculo
     # price property setter method
-    @preco.setter
-    def preco(self, preco):
-        self._preco = float(preco)
+    @preco_veiculo.setter
+    def preco_veiculo(self, preco):
+        self._preco_veiculo = float(preco)
     # first date getter method
     @property
     def datainicio(self):
@@ -78,4 +78,6 @@ class Aluguer(Gclass):
     @datafinal.setter
     def datainicio(self, dataf):
         self._datafinal = datetime.date.fromisoformat(dataf)
-        
+    def preco_aluguer(self):
+        p=self._preco_veiculo*self._dias
+        return p
