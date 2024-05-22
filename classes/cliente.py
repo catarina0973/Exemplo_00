@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  2 08:36:29 2024
-
-@author: cacfa
-"""
 from classes.gclass import Gclass
 
 class Cliente(Gclass):
@@ -11,28 +5,34 @@ class Cliente(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    auto_number = 0
     nkey = 1
-    att=['_nome','_endereco','_telemovel','_senha']
-    def __init__(self, nome, endereco, telemovel, senha):
+    auto_number = 0
+    # class attributes, identifier attribute must be the first one on the list
+    att = ['_code','_endereco','_telemovel','_senha']
+    # Class header title
+    header = 'Cliente'
+    # field description for use in, for example, in input form
+    des = ['User','Endereço de e-mail','Telemóvel','Password']
+    # Constructor: Called when an object is instantiated
+    def __init__(self, code, endereco, telemovel, senha):
         super().__init__()
         
-        self._nome=str(nome)
+        self._code=code
         self._endereco=str(endereco)
         self._telemovel=telemovel
         self._senha=senha
         
-        Cliente.obj[nome]=self
-        Cliente.lst.append(nome)
+        Cliente.obj[code]=self
+        Cliente.lst.append(code)
     
     
     
     @property 
-    def nome(self):
-        return self._nome
-    @nome.setter 
-    def nome(self, nome):
-        self._nome=nome
+    def code(self):
+        return self._code
+    @code.setter 
+    def code(self, nome):
+        self._code=nome
     @property 
     def endereco(self):
         return self._endereco
@@ -43,7 +43,9 @@ class Cliente(Gclass):
     @property 
     def telemovel(self):
         return self._telemovel
-    
+    @telemovel.setter 
+    def telemovel(self, telemovel):
+        self._telemovel=telemovel
     @property 
     def senha(self):
         return self._senha
