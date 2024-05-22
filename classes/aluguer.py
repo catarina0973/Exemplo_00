@@ -23,26 +23,20 @@ class Aluguer(Gclass):
         super().__init__()
         # Object attributes
         # Check the order and product referential integrity
-        if user in Cliente.lst:
-            if code in Veiculo.lst:
-                self._code=code #o code é o modelo do veiculo
-                self._user = user
-                self._dias = int(dias)
-                self._precodiario = precodiario
-                self._precototal = precototal
-                self._datainicio = datetime.date.fromisoformat(datainicio)
-                self._datafinal = datetime.date.fromisoformat(datafinal)
-                self._recolha=recolha
+        
+        self._code=code #o code é o modelo do veiculo
+        self._user = user
+        self._dias = int(dias)
+        self._precodiario = precodiario
+        self._precototal = precototal
+        self._datainicio = datetime.date.fromisoformat(datainicio)
+        self._datafinal = datetime.date.fromisoformat(datafinal)
+        self._recolha=recolha
             # Add the new object to the OrderProduct list
-                Aluguer.obj[code] = self
-                Aluguer.lst.append(code)
-            else:
-                print('Aluguer ', code, ' inexistente.')
-        else:
-            print('Aluguer', code, ' inexistente.')
-    
-    # Object properties
-
+        Aluguer.obj[code] = self
+        Aluguer.lst.append(code)
+            
+   
     @property
     def recolha(self):
         return self._recolha
