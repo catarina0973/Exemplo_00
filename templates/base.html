@@ -9,26 +9,27 @@
   </head>
 
     <body>
-        {% if ulogin == None %}
-            <section class="hero-section">
-                <div class="buttons">
+        <nav>
+            <ul class="menu">
+                {% if ulogin == None %}
+            
                   
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    <a href="/login" class="join">Login</a>
-                </div>
-            </section>
+                    
+                    <a href="/login" class="button">Login</a>
+                    <a href="/signup" class="button">Criar conta</a>
+
+            </ul>
+        </nav>
         {% else %}
 
             <nav class="navbar">
-                <ul class="links">
+                <ul class="menu">
                     {% if usergroup == 'Cliente' %} 
                         <li><a class="button" href="/">Página inicial</a></li>
                         <li><a class="button" href="/gformC/Cliente">Cliente</a></li>
-                        <li><a class="button" href="/gformC/Aluguer">Aluguer</a></li>                    
-                        <li><a class="button" href="/veiculo">Veículos</a></li>                    
+                        <li><a class="button" href="/veiculo">Veículos</a></li>  
+                        <li><a class="button" href="/gformA/Aluguer">Aluguer</a></li>                    
+                                          
                         <li><a class="button" href="/logoff">Logoff</a></li>                                        
                         <li><a class="button" style="color:white">User:{{ulogin}}</a></li>                                        
                         <br><br>
@@ -39,12 +40,10 @@
                         <li><a class="button" href="/submenu?subm=Aluguer">Alugueres</a></li>                    
                         <li><a class="button" href="/gform/Userlogin">Users</a></li>
                         <li><a class="button" href="/submenu?subm=Veiculo">Veículos</a></li>
-                        <li><a class="button" href="/gform/Veiculo">Alterar disponibilidade dos Veiculos</a></li>                   
                         <li><a class="button" href="/logoff">Logoff</a></li>                                        
                         <li><a class="button" style="color:white">User:{{ulogin}}</a></li>                                        
                         <br><br>
                         {% if submenu == 'Aluguer' %}
-                            
                             <li><a class="button" href="/gformT/Aluguer?option=''&subm=Aluguer">Alugueres Realizados</a></li>
                         {%endif%} 
                         {% if submenu == 'Veiculo' %}

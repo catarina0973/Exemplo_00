@@ -1,0 +1,47 @@
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+</style>
+
+        
+        <div class="dados">
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+            <h1>Sign Up</h1>
+            <form id="form" action="/chkregister" method="post">
+                <label for="user">User:</label>
+                <input type="text" id="user" name="user" value="{{ user }}" size="30" required/>
+                <br><br>
+                <label for="usergroup">User Group:</label>
+                <select id="usergroup" name="usergroup" required>
+                    <option value="Admnistrador" {% if usergroup == 'Administrador' %}selected{% endif %}>Administrador</option>
+                    <option value="Cliente" {% if usergroup == 'Cliente' %}selected{% endif %}>Cliente</option>
+                </select>
+                <br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" value="{{ password }}" size="30" required/>
+                <br><br>
+                <button class="buttons" type="submit" class="button1">SignUp</button>
+                        
+            </form>
+            <br><br>
+            <h3>{{ resul }}</h3>
+            <br><br>
+            
+            <nav>
+                <ul class="dados">
+                     
+                    <a href="/" class="button">Voltar</a>
+
+                </ul>
+            </nav>
+        </div>
+   
+{% endblock %}
