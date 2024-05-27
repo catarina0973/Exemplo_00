@@ -1,39 +1,33 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 09:24:10 2024
-
-@author: cacfa
-"""
-
 from classes.gclass import Gclass
 
 class Veiculo(Gclass):
     obj = dict()
+    vobj=dict()
+    robj=dict()
     lst = list()
     pos = 0
     sortkey = ''
     auto_number = 0 # = 1 in case of auto number on
     nkey = 1
     # class attributes, identifier attribute must be the first one on the list
-    att = ['_code','_modelo','_ano','_valordiario', '_disponivel','_recolha']
+    att = ['_code','_ano','_valordiario', '_recolha']
     # Class header title
     header = 'Veículo'
     # field description for use in, for example, in input form
-    des = ['Code','Modelo','Ano','Valor Diário', 'Disponível','Local de Recolha']
+    des = ['Modelo','Ano','Valor Diário', 'Local de Recolha']
     # Constructor: Called when an object is instantiated
-    def __init__(self, code, modelo, ano, valordiario, disponivel, recolha):
+    def __init__(self, code, ano, valordiario, recolha):
         super().__init__()
         
-        self._code=code
-        self._modelo=modelo
+        self._code=code #o modelo é o code
         self._ano=ano
         self._valordiario=valordiario
-        self._disponivel=disponivel
+        
         self._recolha=recolha
         Veiculo.obj[code]=self
         Veiculo.lst.append(code)
-    
-    
+        Veiculo.vobj[self._code]=self._valordiario
+        Veiculo.robj[self._code]=self._recolha
     
     @property 
     def code(self):
@@ -47,12 +41,7 @@ class Veiculo(Gclass):
     @recolha.setter 
     def recolha(self,local):
         self._recolha=local
-    @property 
-    def modelo(self):
-        return self._modelo
-    @modelo.setter 
-    def modelo(self, model):
-        self._modelo=model
+    
         
     @property 
     def ano(self):
@@ -66,12 +55,7 @@ class Veiculo(Gclass):
     @valordiario.setter 
     def valordiario(self, valordiario):
         self._valordiario=valordiario
-    @property 
-    def disponivel(self):
-        return self._disponivel
-    @disponivel.setter 
-    def disponivel(self, valor):
-        self._disponivel= valor
+    
     def clear():
         Veiculo.obj.clear()
         Veiculo.lst.clear()
