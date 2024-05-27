@@ -31,7 +31,7 @@ def gformC(cname='',submenu=""):
                 strobj += ";" + request.form[cl.att[i]]
             obj = cl.from_string(strobj)
             cl.insert(getattr(obj, cl.att[0]))
-            # cl.last()
+            cl.last()
         elif prev_option == 'edit' and option == 'save':
             obj = cl.current()
             # if auto_number = 1 the key stays the same
