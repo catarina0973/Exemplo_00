@@ -14,7 +14,7 @@ Veiculo.read(filename + 'business.db')
 cname = "Veiculo"
 cl = eval(cname)
 
-obj = cl('admin1','')
+obj = cl('','','','')
 
 print("objeto sem estar gravado ",obj)
 

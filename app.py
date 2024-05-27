@@ -28,8 +28,9 @@ import subs_gform as gfsub
 import subs_gformT as gfTsub
 import subs_veiculo as vsub
 import subs_gformC as csub
+import subs_gformA as Asub
 # import subs_mapaOrderform as mapasub
-
+import subs_signup as ssub
 
 @app.route("/")
 def index():
@@ -46,6 +47,18 @@ def logoff():
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
     return lsub.chklogin()
+@app.route("/signup")
+def signup():
+    return ssub.signup()
+@app.route("/chkregister", methods=["post","get"])
+def chkregister():
+    return ssub.chkregister()
+
+@app.route("/gformA/<cname>", methods=["post","get"])
+def gformA(cname=''):
+    submenu = request.args.get("subm")
+    return Asub.gformA(cname,submenu)
+
 @app.route("/veiculo")
 def veiculo():
     return vsub.veiculo()
@@ -71,15 +84,11 @@ def gformT(cname=''):
     submenu = request.args.get("subm")
     return gfTsub.gformT(cname,submenu)
 
-
-
-
-
-
-
-
     
 if __name__ == '__main__':
     print(Userlogin.set_password("2023"))
-    app.run(debug=True,port=6001)
-    #app.run()
+    print(Aluguer.iobj)
+    print(Aluguer.fobj)
+    print(Userlogin.obj.keys())
+    #app.run(debug=True,port=6001)
+    app.run(port =6001)

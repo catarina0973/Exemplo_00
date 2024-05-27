@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 22 08:28:08 2024
+Created on Wed May 22 15:12:18 2024
 
 @author: cacfa
 """
@@ -11,10 +11,10 @@ from classes.admnistradores import Admnistradores
 from classes.veiculo import Veiculo
 from classes.aluguer import Aluguer
 from classes.userlogin import Userlogin
-
+from datafile import filename
 prev_option = ""
 
-def gformC(cname='',submenu=""):
+def gformA(cname='',submenu=""):
     global prev_option
     ulogin=session.get("user")
     if (ulogin != None):
@@ -23,6 +23,7 @@ def gformC(cname='',submenu=""):
         butedit = "disabled"
         option = request.args.get("option")
         if prev_option == 'insert' and option == 'save':
+            
             if (cl.auto_number == 1):
                 strobj = "None"
             else:
@@ -30,10 +31,33 @@ def gformC(cname='',submenu=""):
             for i in range(1,len(cl.att)):
                 strobj += ";" + request.form[cl.att[i]]
             obj = cl.from_string(strobj)
-            cl.insert(getattr(obj, cl.att[0]))
-            # cl.last()
+            
+            # Criado por nós
+            approval = obj.chk_validity()
+            print(approval)
+            
+            print(Aluguer.lst)
+            print(Aluguer.ilist)
+            print(Aluguer.flist)
+            print(Userlogin.user)
+            if approval == 'Aprovado!':
+                cl.insert(getattr(obj, cl.att[0]))
+                cl.last()
+                return render_template("gformA.html", butshow=butshow, butedit=butedit,
+                                cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
+                                ulogin=session.get("user"),auto_number=cl.auto_number,
+                                submenu=submenu, resul=approval,usergroup=session.get('usergroup'))
+            else:
+                cod = getattr(obj, cl.att[0])
+                del cl.obj[cod]
+                cl.read(filename + 'business.db')
+                return render_template("gformA.html", butshow='disabled', butedit='enabled',
+                                cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
+                                ulogin=session.get("user"),auto_number=cl.auto_number,
+                                submenu=submenu, resul=approval,usergroup=session.get('usergroup'))
         elif prev_option == 'edit' and option == 'save':
             obj = cl.current()
+            
             # if auto_number = 1 the key stays the same
             for i in range(cl.auto_number,len(cl.att)):
                 att = cl.att[i]
@@ -61,9 +85,10 @@ def gformC(cname='',submenu=""):
             obj = dict()
             for att in cl.att:
                 obj[att] = ""
-        return render_template("gformC.html", butshow=butshow, butedit=butedit,
+        return render_template("gformA.html", butshow=butshow, butedit=butedit,
                         cname=cname, obj=obj,att=cl.att,header=cl.header,des=cl.des,
                         ulogin=session.get("user"),usergroup=session.get('usergroup'), auto_number=cl.auto_number,
                         submenu=submenu)
     else:
         return render_template("index.html", ulogin=ulogin)
+
