@@ -97,7 +97,7 @@ class Aluguer(Gclass):
         
         return self._precototal
     # price property setter method
-    @precodiario.setter
+    @precototal.setter
     def precototal(self, preco):
         self._precototal = float(preco)
     # first date getter method
